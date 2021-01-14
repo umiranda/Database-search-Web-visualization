@@ -2,42 +2,46 @@
 var tableData = data;
 
 // YOUR CODE HERE!
-//filtering to gegt the data
-var button = d3.select("#button");
 
-var form = d3.select("#form");
+//looping through to create the table
+    var tbody = d3.select("tbody");
+    console.log(data);
+
+    data.forEach( function(ufoReport){
+        var row = tbody.append("tr")
+        Object.entries(ufoReport).forEach( function ([key,value]){
+            row.append("td").text(value)
+});
+});
+
+
+var button = d3.select("#filter-btn");
+
+//var form = d3.select("#form");
 
 button.on("click", runEnter);
-form.on("submit", runEnter);
+//form.on("submit", runEnter);
+
+//d3.select("tbody").html("");
 
 function runEnter () {
     d3.event.preventDefault();
 
-    var inpuElement = d3.select("#datetime");
+    var dateTime = d3.select("#datetime").property("value");
+    console.log(dateTime);
 
-    var inputValue = inputElement.property("value");
-
-    console.log(inputValue);
-    console.log(tableData);
-
-    var filteredData = tableData.filter(date => date.datetime === inputValue);
-
+    var filteredData = tableData.filter(record => record.datetime === dateTime);
     console.log(filteredData);
 
-}
+    filteredData.forEach((ufoReport) => {
+        var row = tbody.append('tr');
+    
+        Object.entries(ufoReport).forEach(([key, value]) => {
+            console.log(key, value);
+            var cell = row.append('td');
+            cell.text(value);
+        });
+    });
+    
 
-
-
-//----------------------
-//looping through to create the table
-var tbody = d3.select("tbody");
-console.log(data);
-
-data.forEach( function(ufoReport){
-        var row = tbody.append("tr")
-        Object.entries(ufoReport).forEach( function ([key,value]){
-            row.append("td").text(value)
-}
-)
-})
-
+};
