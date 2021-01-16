@@ -14,28 +14,20 @@ var tableData = data;
 });
 });
 
-// Select the submit button in the html file
 var clickHandler = d3.select("#filter-btn");
-
-//Click event
 clickHandler.on("click", function() {
 
-//Remove existing table
 d3.select("tbody").html("");
-
-//Prevent page from refreshing
 d3.event.preventDefault();
 
-// Get the value property of the input elements and set all text to lowercase
+// value property of the input elements 
 var dateTime = d3.select("#datetime").property("value");
 var selectedCountry = d3.select("#country").property("value").toLowerCase();
 var selectedState = d3.select("#state").property("value").toLowerCase();
 var selectedCity = d3.select("#city").property("value").toLowerCase();
 var selectedShape = d3.select("#shape").property("value").toLowerCase();
 
-// initialize tableData as filteredData
 filteredData = tableData;
-
 if (dateTime) {
     filteredData = filteredData.filter(record => record.datetime === dateTime);
 }
@@ -52,7 +44,7 @@ if (selectedShape) {
     filteredData = filteredData.filter(record => record.shape === selectedShape);
 }
 
-// Display the filtered dataset
+// Showing the filter data
 
 filteredData.forEach((report) => {
     var row = tbody.append('tr');
